@@ -1,0 +1,107 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h3 style="text-align: center;">Generate QR Id batch</h3>
+      
+    </div>
+  </div>
+
+  <form #generateQR= "ngForm"  (ngSubmit) = "generateQRId(generateQR)">
+
+  <div class="row">
+
+    <div class="col-sm-2"></div>
+
+    <div class="col-sm-8" >
+
+      <div class="row">
+
+        <div class="col-sm-12" style="margin-top: 100px;">
+
+          <div class="card">
+
+            <div class="card-body">
+
+              <div class="row">
+
+                <div class="col-sm-12">
+                 
+                 <div class="form-group">
+                   <select class="form-control" 
+                   name ="selLegalEntity" [(ngModel)]="selLegalEntity" #selLegalEntityModel = "ngModel"
+                   data-toggle="tooltip" data-placement="top" title= "Legal Entity"
+                   [ngClass]="{'is-invalid': generateQR.submitted && selLegalEntity == 0}"
+                   >
+                     <option value="0">- Select Legal Entity -</option>
+                     <option *ngFor="let legalEntity of legalEntityMasterArr" [value]="legalEntity.legalEntityId">
+                       {{legalEntity.legalEntityName}}
+                     </option>
+                   </select>
+
+                   <div *ngIf="generateQR.submitted && selLegalEntity == 0" class="invalid-feedback" >
+                     Please select legal entity
+                   </div>
+
+                 </div>
+
+                 <div class="form-group">
+
+                   <input type="number" class="form-control" placeholder="Number of QR Id required"
+                   data-toggle="tooltip" data-placement="top" title= "Number of QR Id required"
+                   name = "numOfQrId" [(ngModel)]="numOfQrId" #numOfQrIdModel = "ngModel"
+                   required
+                   [ngClass]="{'is-invalid': generateQR.submitted && numOfQrIdModel.invalid}"
+                   />
+
+                   <div *ngIf="generateQR.submitted && numOfQrIdModel.invalid" class="invalid-feedback">
+                     Please enter number of QR Id to generate
+                   </div>
+
+                 </div>
+
+                 <div class="form-group" >
+
+                  <div class="row">
+
+                    <div class="col-sm-4">
+                        <button type="submit" [disabled]="btnDisable" class="btn btn-success" style="width: 100%;">Submit</button>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <button type="reset" [disabled]="btnDisable" class="btn btn-danger" style="width: 100%;">Reset</button>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <img class="img-responsive" class="float-right"  height=50 width=50 src="/assets/images/Loading_icon.gif" 
+                         *ngIf="loadingBit == true" />
+                    </div>
+
+                  </div>
+
+                  
+                   
+                 </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="col-sm-2"></div>
+
+  </div>
+
+</form>
+
+</div>

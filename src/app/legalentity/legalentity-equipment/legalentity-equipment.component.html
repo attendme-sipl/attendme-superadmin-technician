@@ -1,0 +1,375 @@
+<div class="container-fluid">
+
+  <form #equipment ="ngForm" (ngSubmit)="AddEquipment(equipment)">
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h3 style="text-align: center;">{{ legalEntituMenuName }}</h3>
+
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+
+      <div class="card">
+
+
+        <div class="card-header">{{ legalEntituMenuName }} Details</div>
+
+        <div class="card-body">
+
+            <div class="form-group">
+    
+              <div class="row">
+    
+                <div class="col-sm-4">
+
+                  <div class="form-group">
+    
+                    <select class="form-control"
+                    name="legalEntityEquptModel.qrCodeId" [(ngModel)]="legalEntityEquptModel.qrCodeId" #qrIdModel ="ngModel"
+                    data-toggle="tooltip" data-placement="top" title= "Select QR Id"
+                    [ngClass]="{'is-invalid': equipment.submitted && legalEntityEquptModel.qrCodeId == 0 }"
+                    >
+                   
+                    <option value=0>QR Id</option>
+                    <option *ngFor="let qrIdRec of qrIdArr" [value]="qrIdRec.qrCodeId"  >
+                        {{qrIdRec.qrId}}
+                      </option>
+         
+                   </select>
+
+                  
+
+                   <div *ngIf="equipment.submitted && legalEntityEquptModel.qrCodeId == 0" class="invalid-feedback">
+                     Please Select QR Code Id
+                   </div>
+
+                  </div>
+    
+                </div>
+                <div class="col-sm-4">
+    
+                  <input type="text" class="form-control" placeholder="{{ legalEntituMenuName }} Name"
+                   name="legalEntityEquptNameModel.equptName" [(ngModel)]="legalEntityEquptNameModel.equptName" #equptNmModel = "ngModel"
+                   data-toggle="tooltip" data-placement="top" title= "{{ legalEntituMenuName }} Name"
+                  />
+    
+                </div>
+                <div class="col-sm-4">
+    
+                    <input type="text" class="form-control" placeholder="{{ legalEntituMenuName }} Model"
+                    name="legalEntityEquptModelNm.equptModel" [(ngModel)]="legalEntityEquptModelNm.equptModel" #equptModelNmModel = "ngModel"
+                    data-toggle="tooltip" data-placement="top" title= "{{ legalEntituMenuName }} Model"
+                   />
+    
+                </div>
+        
+    
+              </div>
+    
+              <div class="row" style="margin-top: 15px;">
+    
+                <div class="col-sm-4">
+    
+                    <input type="text" class="form-control" placeholder="{{ legalEntituMenuName }} Serial Number"
+                    name="legalEntityEquptModel.serialNumber" [(ngModel)]="legalEntityEquptModel.serialNumber" #equptSerialModelModel = "ngModel"
+                    data-toggle="tooltip" data-placement="top" title= "{{ legalEntituMenuName }} Serial Number"
+                   />
+                  
+                </div>
+    
+                <div class="col-sm-4">
+    
+                    <input type="text" class="form-control" placeholder="{{ legalEntituMenuName }} Installation Month"
+                    name="legalEntityEquptModel.installMonth" [(ngModel)]="legalEntityEquptModel.installMonth" #equptInstallMonthModel = "ngModel"
+                    data-toggle="tooltip" data-placement="top" title= "{{ legalEntituMenuName }} Installation Month"
+                   />
+    
+                </div>
+    
+                <div class="col-sm-4">
+    
+                    <input type="text" class="form-control" placeholder="{{ legalEntituMenuName }} Installation Year"
+                    name="legalEntituMenuName.installYear" [(ngModel)]="legalEntityEquptModel.installYear" #equptInstallYearModel = "ngModel"
+                    data-toggle="tooltip" data-placement="top" title= "{{ legalEntituMenuName }} Installation Year"
+                   />
+    
+                </div>
+    
+              </div>
+    
+              <div class="row" style="margin-top: 15px;">
+              
+                <div class="col-sm-12">
+    
+                    <textarea class="form-control" placeholder="{{ legalEntituMenuName }} Description"
+                    name="legalEntityEquptModel.equptDesc" [(ngModel)]="legalEntityEquptModel.equptDesc" #equptSerialDescModel = "ngModel"
+                    data-toggle="tooltip" data-placement="top" title= "{{ legalEntituMenuName }} Description"
+                   ></textarea>
+    
+    
+                </div>
+    
+              </div>
+    
+            </div>
+
+            
+    
+          </div>
+
+      </div>
+
+      
+      <div class="card">
+
+        <div class="card-header">{{ legalEntituMenuName }} Manufacturer Details</div>
+
+        <div class="card-body">
+
+          <div class="row">
+
+            <div class="col-sm-12">
+
+              <div class="row">
+              
+                  <div class="col-sm-12">
+                      <input type="text" class="form-control" placeholder="Manufacturer Name"
+                      data-toggle="tooltip" data-placement="top" title= "Manufacturer Name"
+                      name="legalEntityEquptManufModel.manufName" [(ngModel)]="legalEntityEquptManufModel.manufName" #equptManufNm = "ngModel"
+                     />
+                  </div>
+                
+              </div>
+
+              <div class="row" style="margin-top: 15px;">
+              
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="Manufacturer Contact Person"
+                    data-toggle="tooltip" data-placement="top" title= "Manufacturer Contact Person"
+                    name="legalEntityEquptManufModel.contactPersonName" [(ngModel)]="legalEntityEquptManufModel.contactPersonName" #equptManufContactPerson = "ngModel"
+                   />
+                </div>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="Contact Mobile"
+                    data-toggle="tooltip" data-placement="top" title= "Contact Mobile"
+                    name="legalEntityEquptManufModel.contactMobile" [(ngModel)]="legalEntityEquptManufModel.contactMobile" #equptManufContactMobile = "ngModel"
+                    />
+                </div>
+
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="Contact Email"
+                    data-toggle="tooltip" data-placement="top" title= "Contact Email"
+                    name="legalEntityEquptManufModel.contactEmail" [(ngModel)]="legalEntityEquptManufModel.contactEmail" #equptManufContactEmail = "ngModel" 
+                    />
+                </div>
+
+              </div>
+              
+
+            </div>
+
+          
+          </div>
+
+          
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-header">
+          
+            <div class="clearfix">
+              <p class="float-left">{{legalEntituMenuName}} Service Provider Details</p>
+              
+              <button class="btn float-right" type="button">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
+              
+              </div>
+        </div>
+
+        <div class="card-body">
+
+          <div class="row">
+
+            <div class="col-sm-12">
+                <input type="text" class="form-control" placeholder="Service Provider Name"
+                data-toggle="tooltip" data-placement="top" title= "Contact Email"
+                name="legalEntityEquptServiceProviderModel.serviceProviderName" [(ngModel)]="legalEntityEquptServiceProviderModel.serviceProviderName" #equptManufContactEmail = "ngModel" 
+               />
+            </div>
+
+          </div>
+
+          <div class="row" style="margin-top: 15px">
+
+              <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="Contact Person Name"
+                  data-toggle="tooltip" data-placement="top" title= "Contact Email"
+                  name="legalEntityEquptServiceProviderModel.contactPersonName" [(ngModel)]="legalEntityEquptServiceProviderModel.contactPersonName" #equptManufContactEmail = "ngModel"
+                 />
+              </div>
+          
+            <div class="col-sm-4">
+
+                <input type="text" class="form-control" placeholder="Contact Mobile"
+                data-toggle="tooltip" data-placement="top" title= "Contact Email"
+                name="legalEntityEquptServiceProviderModel.contactMobile" [(ngModel)]="legalEntityEquptServiceProviderModel.contactMobile" #equptManufContactEmail = "ngModel" />
+
+            </div>
+
+            <div class="col-sm-4">
+
+                <input type="text" class="form-control" placeholder="Contact Email"
+                data-toggle="tooltip" data-placement="top" title= "Contact Email"
+                name="legalEntityEquptServiceProviderModel.contactEmail" [(ngModel)]="legalEntityEquptServiceProviderModel.contactEmail" #equptManufContactEmail = "ngModel" />
+
+            </div>
+
+            
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-header">{{legalEntituMenuName}} Owner Information</div>
+
+        <div class="card-body">
+
+          <div class="row">
+
+            <div class="col-sm-12">
+                <input type="text" class="form-control" placeholder="Owner Name"
+                data-toggle="tooltip" data-placement="top" title= "Contact Email"
+                name="legalEntityEquptOwnerInforModel.ownerName" [(ngModel)]="legalEntityEquptOwnerInforModel.ownerName" #equptOwnerNameModel = "ngModel"
+               />
+            </div>
+
+            
+
+
+          </div>
+
+          <div class="row" style="margin-top: 15px;">
+          
+            <div class="col-sm-12">
+                <textarea type="" class="form-control" placeholder="Location"
+                name="legalEntityEquptOwnerInforModel.ownerAddress" [(ngModel)]="legalEntityEquptOwnerInforModel.ownerAddress" #OwnerAddressModel = "ngModel"
+                data-toggle="tooltip" data-placement="top" title= "Location"
+               ></textarea>
+            </div>
+
+          </div>
+
+          <div class="row" style="margin-top: 15px;">
+          
+          
+              <div class="col-sm-4">
+
+                  <input type="text" class="form-control" placeholder="Contact Person Name"
+                  data-toggle="tooltip" data-placement="top" title= "Contact Email"
+                  name="legalEntityEquptOwnerContactModel.contactPersonName" [(ngModel)]="legalEntityEquptOwnerContactModel.contactPersonName" #equptOwnerContactNmModel = "ngModel"
+                 />
+  
+              </div>
+
+              <div class="col-sm-4">
+
+                  <input type="text" class="form-control" placeholder="Contact Mobile"
+                  data-toggle="tooltip" data-placement="top" title= "Contact Mobile"
+                  name="legalEntityEquptOwnerContactModel.contactMobile" [(ngModel)]="legalEntityEquptOwnerContactModel.contactMobile" #equptOwnerContactMobileModel = "ngModel"
+                 />
+
+              </div>
+
+              <div class="col-sm-4">
+                  <input type="text" class="form-control" placeholder="Contact Email"
+                  data-toggle="tooltip" data-placement="top" title= "Contact Mobile"
+                  name="legalEntityEquptOwnerContactModel.contactEmail" [(ngModel)]="legalEntityEquptOwnerContactModel.contactEmail" #equptOwnerContactEmailModel = "ngModel"
+                 />
+              </div>
+
+             
+          </div>
+
+          
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-sm-12">
+             
+              <div *ngIf="equipment.submitted && errorBit" class="alert alert-danger">
+                {{errorMessage}}
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row">
+              <div class="col-sm-12">
+               
+                <div *ngIf="equipment.submitted && successBit" class="alert alert-success">
+                  {{successMessage}}
+                </div>
+  
+              </div>
+            </div>
+
+          <div class="row">
+ 
+              <div class="col-sm-3"></div>
+
+              <div class="col-sm-3">
+      
+                <button type="submit" [disabled]="disableBtn" class="btn btn-success" style="width: 100%;">Submit</button>
+      
+              </div>
+      
+              <div class="col-sm-3">
+      
+                  <button type="reset" class="btn btn-danger" [disabled]="disableBtn" style="width: 100%;" (click)="resetFunction(equipment)">Reset</button>
+      
+              </div>
+      
+              <div class="col-sm-3">
+
+                  <img class="img-responsive"  height=70 width=70 src="/assets/images/Loading_icon.gif" 
+                  *ngIf="loading==true"
+                 /> 
+              </div>
+
+          </div>
+
+        </div>
+
+        
+
+      </div>
+
+    </div>
+
+  </div>
+
+</form>
+
+</div>
+

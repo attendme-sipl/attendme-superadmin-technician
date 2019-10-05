@@ -1,0 +1,107 @@
+<h3 mat-dilaog-title>
+  {{complaintMenuName}} Details (No.: {{complaintNumber}})
+</h3>
+
+<mat-dialog-content>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="enableProgressBar"></mat-progress-bar>
+
+  <table class="table">
+    <tr>
+      <th>QR ID</th>
+      <td>{{ complaintData.qrId }}</td>
+    </tr>
+
+    <tr>
+      <th>{{ equipmentMenuName }} Name</th>
+      <td>{{ complaintData.equipmentName }}</td>
+    </tr>
+
+    <tr>
+      <th>{{ equipmentMenuName }} Model</th>
+      <td>{{ complaintData.equipmentModel }}</td>
+    </tr>
+
+    <tr>
+      <th>Serial Number</th>
+      <td>{{ complaintData.equptSerialNumber }}</td>
+    </tr>
+
+    <tr>
+      <th>Purchase Date</th>
+      <td>{{ complaintData.equipmentInstallDate }}</td>
+    </tr>
+
+
+    <tr>
+      <th>Owner</th>
+      <td>{{ complaintData.equipmentOwnerName }}</td>
+    </tr>
+
+    <tr>
+      <th>{{equipmentMenuName}} Location</th>
+      <td>{{ complaintData.equipmentOwnerLocation }}</td>
+    </tr>
+
+    <tr>
+      <th>{{complaintMenuName}} Details</th>
+      <td>{{ complaintData.complaintDescription  }}</td>
+    </tr>
+
+    <tr>
+      <th>{{complaintMenuName}} Date</th>
+      <td>{{ complaintData.complaintDate  }}</td>
+    </tr>
+
+    <tr>
+      <th>Operator</th>
+      <td>{{ complaintData.operatorName }}</td>
+    </tr>
+
+    <tr>
+      <th>Operator Contact</th>
+      <td>{{ complaintData.operatorContactNumber }}</td>
+    </tr>
+
+    <tr>
+      <th>{{complaintMenuName}} Assinged Date</th>
+      <td>{{ complaintData.assignedDate }}</td>
+    </tr>
+
+    <tr>
+      <th>Assigned {{ technicianMenuName }}</th>
+      <td>{{ complaintData.assingTechnicianName}}</td>
+    </tr>
+
+    <tr>
+      <th>Assigned {{ technicianMenuName }} Contact</th>
+      <td>{{ complaintData.assignTechnicianContactNumber}}</td>
+    </tr>
+
+    <tr>
+      <th>Closed Date</th>
+      <td>{{ complaintData.closedDate }}</td>
+    </tr>
+
+    <tr>
+      <th>Failure Reason</th>
+      <td>{{ complaintData.failureReason}}</td>
+    </tr>
+
+    <tr>
+      <th>Action Taken</th>
+      <td>{{ complaintData.actionTaken}}</td>
+    </tr>
+
+    <tr>
+      <th>Current Status</th>
+      <td>{{complaintData.complaintStatus}} </td>
+    </tr>
+
+  </table>
+  
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+ <button mat-button [mat-dialog-close] = "true" cdkFocusInitial>Close</button>
+</mat-dialog-actions>

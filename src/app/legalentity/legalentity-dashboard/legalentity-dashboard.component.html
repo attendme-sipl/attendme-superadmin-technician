@@ -1,0 +1,167 @@
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="col-sm-12">
+      <h3>{{branchModel.branchName}} - Dashboard</h3>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-12">
+
+      <div class="row">
+
+        <div class="col-sm-4">
+            <div class="card ">
+
+                <div class="card-header bg-secondary text-white">
+
+                  <div class="clearfix">
+                      <p class="float-left">QR Code Usage</p>
+                      <button class="btn btn-default float-right" type="button" (click) = "getQRUsageDetails();">
+                         <mat-icon svgIcon="refresh-panel"></mat-icon>
+                      </button>
+                  </div>
+
+                </div>
+        
+                <div class="card-body">
+
+                    <mat-progress-bar mode="indeterminate" *ngIf="QRUsageConciseProgressBar"></mat-progress-bar>
+
+                  <div class="table-responsive">
+
+                    <table class="table">
+        
+                      <tr>
+                        <th>QR Id Issued</th>
+                        <td> <a href="#">{{qrUsageModel.totalQRIdAlloted}}</a></td>
+                      </tr>
+        
+                      <tr>
+                        <th>QR ID Total Assigned</th>
+                        <td>{{qrUsageModel.totalQRIdAssigned}}</td>
+                      </tr>
+        
+                      <tr>
+                        <th>QR ID Remaining</th>
+                        <td>{{qrUsageModel.totalPendingQRId}}</td>
+                      </tr>
+        
+                       <tr>
+                        <th>QR ID Allowed</th>
+                        <td>{{qrUsageModel.totalQRIdRuleBook}}</td>
+                      </tr>
+        
+                    </table>
+        
+                  </div>
+                </div>
+        
+              </div>
+        </div>
+        <div class="col-sm-4">
+         
+          <div class="card">
+
+            <div class="card-header bg-secondary text-white">
+                <div class="clearfix">
+                   <p class="float-left">{{complaintsMenuName}}</p>
+                   <button class="btn btn-default float-right" type="button" (click) = "popComplaintConciseRpt();">
+                      <mat-icon svgIcon="refresh-panel"></mat-icon>
+                   </button>
+    
+                </div>
+            </div>
+            
+
+            <div class="card-body">
+              
+                <mat-progress-bar mode="indeterminate" *ngIf="complaintConciseProgressBar"></mat-progress-bar>
+
+              <div class="table-responsive" >
+                <table class="table">
+
+                  <tr >
+                    <th>Fresh</th>
+                    <td><a routerLink="/legalentity/portal/complaintRpt/fresh">{{freshComplaintCount}}</a></td>
+                  </tr>
+
+                  <tr>
+                    <th>Open</th>
+                    <td><a routerLink="/legalentity/portal/complaintRpt/open">{{openComplaintCount}}</a></td>
+                  </tr>
+
+                  <tr *ngIf="tierLevel">
+                    <th>Assigned</th>
+                    <td><a routerLink="/legalentity/portal/complaintRpt/assinged">{{assignedComplaintCount}}</a></td>
+                  </tr>
+
+                  <tr *ngIf="tierLevel">
+                    <th >Inprogress</th>
+                    <td><a href="#">{{inprogressComplaintCount}}</a></td>
+                  </tr>
+
+                  <tr> 
+                    <th>Closed</th>
+                    <td><a href="#">{{closedComplaintCount}}</a></td>
+                  </tr>
+
+                  <tr> 
+                    <th>Lead Time</th>
+                    <td><a routerLink="/legalentity/portal/complaintRpt/lead-time">{{leadTimeComplaintCount}}</a></td>
+                  </tr>
+
+                </table>
+              </div>
+            </div>
+
+          </div>
+         
+        </div>
+        <div class="col-sm-4">
+          
+          <div class="card"  *ngIf="enableDiableBranchConciseRpt">
+
+              <div class="card-header bg-secondary text-white">
+                  <div class="clearfix">
+                     <p class="float-left">{{branchMenuName}}</p>
+                     <button class="btn btn-default float-right" type="button" (click) = "popBranchDetails();">
+                        <mat-icon svgIcon="refresh-panel"></mat-icon>
+                     </button>
+      
+                  </div>
+              </div>
+
+              <div class="card-body">
+                  <mat-progress-bar mode="indeterminate" *ngIf="branchConciseProgressBar"></mat-progress-bar>
+
+                  <div class="table-responsive">
+
+                    <table class="table">
+                      
+                      <tr>
+                        <th>Total {{ branchMenuName }}</th>
+                        <td><a routerLink = "/legalentity/portal/rpt/branch">{{ totalBranchCount }}</a></td>
+                      </tr>
+
+                    </table>
+
+                  </div>
+              </div>
+
+          </div>
+
+        </div>
+      
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,95 @@
+<div class="container-fluid">
+
+  <div class="row">
+
+    <div class="col-sm-12">
+
+        <nav class="navbar navbar-dark bg-dark">
+
+            <a class="navbar-brand" href="superadmin">
+                <img src="../assets/images/attendmeLogo.png" width="10%" height="10%" class="d-inline-block align-top" alt="">
+              </a>
+
+        </nav>
+
+    </div>
+
+  </div>
+  
+  <form  #LoginForm = "ngForm" (ngSubmit)="CheckLogin(LoginForm)" (keypress)="setValue()" >
+  
+  <div class="row">
+
+    <div class="col-sm-12">
+      
+      <div class="centered" style="width:30%;  border:1px solid gray; padding: 20px 20px;">
+
+        <div class="row">
+
+          <div class="col-sm-12">
+
+            <h4>Super admin login</h4>
+
+          </div>
+
+        </div>
+
+        
+
+        <div class="row" >
+
+          <div class="col-sm-12">
+
+            <div class="form-group">
+             
+              <div *ngIf="(((LoginForm.submitted && (userEmailId.valid && userPassword.valid)) && dispMessage))" 
+              class="alert alert-danger">
+                {{dispMesageStr}}
+              </div>
+             
+             <input type="text" id="emailId" class="form-control" placeholder="Email Id" 
+              required
+              name="emailId" [(ngModel)]="emailId" #userEmailId = "ngModel" 
+              />
+
+              <div *ngIf="LoginForm.submitted && userEmailId.invalid" class="alert alert-danger" style="margin-top:10px">
+                Please enter email id
+              </div>
+
+             </div>
+           
+            <div class="form-group">
+              <input type="password"  class="form-control" placeholder="Password" 
+              required
+              name="password" [(ngModel)]="password" #userPassword = "ngModel" 
+               />
+              
+               <div *ngIf="LoginForm.submitted && userPassword.invalid" class="alert alert-danger"
+               style="margin-top:10px">
+                Please enter password
+              </div>
+ 
+            </div>
+
+            
+                <button id="btnLogin" class="btn btn-success" style="width: 100%;" >Submit</button>
+            
+
+            
+              <a href="#" >Forgot Password</a>
+           
+
+          </div>
+
+        </div>
+     
+        </div>
+    
+    </div>
+
+    </div>
+
+  
+</form>
+
+</div>

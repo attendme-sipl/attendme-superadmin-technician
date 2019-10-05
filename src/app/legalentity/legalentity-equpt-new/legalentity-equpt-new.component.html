@@ -1,0 +1,426 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h3 style="text-align: center; color:maroon;">{{ equptMenuName }}</h3>
+
+    </div>
+  </div>
+
+  <form [formGroup] ="equptForm" #equptFormModel = "ngForm" (ngSubmit) = "addEqupt()">
+
+
+  <div class="row">
+
+    <div class="col-sm-12">
+
+      <div class="card">
+        <div class="card-header">
+         <span style="color:maroon;"> {{equptMenuName}}</span> details
+        </div>
+
+        <div formGroupName="equptDetails">
+          <div class="card-body">
+         
+            <div class="form-group">
+                <div class="form-row">
+           
+                    <div class="col">
+                      <div class="form-group"> 
+                          <select class="form-control" formControlName="qrCodeId" 
+                           [ngClass]="{'is-invalid': equptFormModel.submitted && equptForm.get('equptDetails').get('qrCodeId').errors.validStatus == false }" >
+                            <option value="0">- Select QR Id -</option>
+                            <option *ngFor="let indivQRId of qrIdArr" [ngValue]="indivQRId.qrCodeId">
+                              {{indivQRId.qrId}}
+                            </option>                   
+                           </select>
+
+
+
+                           <div *ngIf="equptFormModel.submitted && equptForm.get('equptDetails').get('qrCodeId').errors.validStatus == false" class="invalid-feedback">
+                             Please select QR Id
+                           </div>
+                      </div>
+                    </div>
+                     
+
+              
+                   
+                      <div class="col" formGroupName="equptNameDetails">
+                        <input type="text" class="form-control" placeholder="{{ equptMenuName }} name" 
+                         data-toggle="tooltip" data-placement="top" title="{{ equptMenuName }} name"
+                         formControlName = "equptName"
+                        />
+                      </div>
+                                       
+        
+                    <div class="col" formGroupName="equptModelDetails">
+                        <input type="text" class="form-control" placeholder="{{ equptMenuName }} model"
+                        data-toggle="tooltip" data-placement="top" title="{{ equptMenuName }} model"
+                        formControlName = "equptModel"
+                       />
+                    </div>
+        
+                  </div>
+            </div>
+  
+            <div class="form-group">
+  
+              <div class="form-row">
+  
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="{{ equptMenuName }} serial number"
+                    data-toggle="tooltip" data-placement="top" title="{{ equptMenuName }} serial number"
+                    formControlName = "serialNumber"
+                   />
+                </div>
+  
+                <div class="col">
+                   <!--<input type="text" class="form-control" placeholder="{{ equptMenuName }} installation month"
+                    data-toggle="tooltip" data-placement="top" title="{{ equptMenuName }} installation month"
+                    formControlName = "installMonth"
+                   /> --> 
+               
+                   
+                
+                   <select class="form-control"
+                   data-toggle="tooltip" data-placement="top" title= "Purchase Month"
+                   formControlName="installMonth" >
+                   <option value="0">- Purchase Month -</option>
+                    <option *ngFor="let month of monthArrNew; index as i; " [value]="i+1" >
+                      {{month}}
+                    </option>
+                  </select>
+
+                  
+
+                </div>
+  
+                <div class="col">
+                    <input type="number" class="form-control" placeholder="{{ equptMenuName }} Purchase Year"
+                    data-toggle="tooltip" data-placement="top" title="{{ equptMenuName }} Purchase Year"
+                    formControlName = "installYear"
+                    
+                   />
+                </div>
+  
+              </div>
+              
+            </div>
+  
+            <div class="form-group">
+              
+              <div class="form-row">
+  
+                <div class="col">
+  
+                  <textarea class="form-control" placeholder="{{equptMenuName}} description" 
+                  data-toggle="tooltip" data-placement="top" title="{{ equptMenuName }} description"
+                  formControlName ="equptDesc" >
+                 </textarea>
+  
+                </div>
+  
+              </div>
+  
+            </div>
+            
+          </div>
+        </div>
+
+       
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+        <span style="color:maroon;">{{equptMenuName}}</span> Manufacturer Details
+        </div>
+        <div class="card-body" formGroupName="equptManufDetails">
+
+          <div class="form-group" >
+            <div class="form-row">
+
+             <div class="col">
+               <input type="text" class="form-control" placeholder="Manufacturer name"
+               data-toggle="tooltip" data-placement="top" title="Manufacturer name"
+               formControlName="manufName"
+               />
+             </div> 
+
+            </div>
+          </div>
+
+          <div class="form-group" >
+              <div class="form-row">
+  
+               <div class="col">
+                 <input type="text" class="form-control" placeholder="Contact person name"
+                 data-toggle="tooltip" data-placement="top" title="Contact person name"
+                 formControlName="contactPersonName"
+                 />
+               </div> 
+
+               <div class="col">
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+     
+                          <select class="form-control" 
+                          data-toggle="tooltip" data-placement="top" title= "Country calling code"
+                          formControlName="countryCallingCode"  >
+                            
+                          <option *ngFor="let countryCode of callingCodeArr | orderBy 'countryCode'" [value]="countryCode.countryCallingCode">
+                            {{countryCode.countryShortName}} - {{countryCode.countryCallingCode}}
+                          </option>
+                            
+                          </select>
+                        
+                      </div>
+                      <input type="text" class="form-control" placeholder="Mobile Number"
+                      data-toggle="tooltip" data-placement="top" title= "Mobile Number"
+                      minlength="10" maxlength="11" 
+                      formControlName="contactMobile"
+                       />
+                  </div>
+                </div> 
+
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Contact email"
+                    data-toggle="tooltip" data-placement="top" title="Contact email"
+                    formControlName="contactEmail"
+                    />
+                </div> 
+  
+              </div>
+            </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+            <div class="clearfix">
+                <p class="float-left"><span style="color:maroon;">{{equptMenuName}}</span> Service Provider Details</p>
+                
+                <button class="btn float-right" type="button" (click) ="addServiceProvider()">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+                
+                </div>
+        </div>
+        <div class="card-body" formArrayName="serviceProvider" >
+        
+
+          <div class="form-group" *ngFor="let serviceProviderData of serviceProviderForm.controls; let i=index"
+           [formGroupName]="i" >
+            <div class="card">
+              <div class="card-header">
+                <div class="clearfix">
+                    <p class="float-left"><span style="color:maroon'">{{equptMenuName}}</span> service provider</p>
+                    <button type="button" class="btn btn-danger float-right" (click)="deleteServiceProvider(i)">Remove</button> 
+                </div>
+                
+              </div>
+              <div class="card-body">
+
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Service provider name"
+                            data-toggle="tooltip" data-placement="top" title="Service provider name"
+                            formControlName="serviceProviderName"
+                             />
+                        </div>
+                      </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-row">
+               
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Contact person name"
+                            data-toggle="tooltip" data-placement="top" title="Contact person name"
+                            formControlName="contactPersonName"
+                             />
+                        </div>
+  
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+               
+                                    <select class="form-control" 
+                                    data-toggle="tooltip" data-placement="top" title= "Country calling code"
+                                    formControlName="countryCallingCode"  >
+                                      
+                                    <option *ngFor="let countryCode of callingCodeArr | orderBy 'countryCode'" [value]="countryCode.countryCallingCode">
+                                     {{countryCode.countryShortName}} - {{countryCode.countryCallingCode}}
+                                    </option>
+                                      
+                                    </select>
+                                  
+                                </div>
+                                <input type="text" class="form-control" placeholder="Mobile Number"
+                                data-toggle="tooltip" data-placement="top" title= "Mobile Number"
+                                minlength="10" maxlength="11" 
+                                formControlName="contactMobile"
+                                 />
+                            </div>
+                        </div>
+  
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Email Id"
+                            data-toggle="tooltip" data-placement="top" title="Email Id"
+                            formControlName="contactEmail"
+                             />
+                        </div>
+                  
+                  </div>
+                </div>
+               
+
+              </div>
+            </div>
+          </div>
+               
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+         
+       <span >{{equptMenuName}}</span> Owner Information
+              
+        </div>
+
+        <div class="card-body" >
+          <div formGroupName="equptOwnerDetails">
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col" >
+                  <input type="text" class="form-control" placeholder="Owner Name"
+                  data-toggle="tooltip" data-placement="top" title="Owner Name"
+                  formControlName="ownerName"
+                   />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+              <div class="form-row">
+                  <div class="col">
+                   <textarea class="form-control" placeholder="Location"
+                    data-toggle="tooltip" data-placement="top" title="Location"
+                    formControlName="ownerAddress">
+                   </textarea> 
+                  </div>
+                </div>
+          </div>
+        </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="clearfix">
+                <p class="float-left">{{equptMenuName}} Owner Contact Details</p>
+                <button class="btn float-right" type="button" (click) ="addEquptOwnerContacts()">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="card-body" formArrayName="ownerContactDetails">
+                                       
+             <div class="card" *ngFor="let equptOwnerContactData of equptOwnerContactForm.controls; let j=index" 
+             [formGroupName]="j">
+
+              <div class="card-header clearfix">
+                <p class="float-left">Contact Details</p>
+                <button type="button" class="btn btn-danger float-right" (click)="deleteEquptOwnerContact(j)">Remove</button> 
+              </div>
+
+              <div class="card-body">
+
+                <div class="form-row">
+                  <div class="col">
+                      <input type="text" class="form-control" placeholder="Contact Person Name"
+                      data-toggle="tooltip" data-placement="top" title="Contact Person Name"
+                      formControlName="contactPersonName"
+                       /> 
+                  </div>
+
+                  <div class="col">
+                      <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+     
+                          <select class="form-control" 
+                          data-toggle="tooltip" data-placement="top" title= "Country calling code"
+                          formControlName="countryCallingCode">
+                            
+                          <option *ngFor="let countryCode of callingCodeArr | orderBy 'countryCode'" [value]="countryCode.countryCallingCode">
+                            {{countryCode.countryShortName}} - {{countryCode.countryCallingCode}}
+                          </option>
+                            
+                          </select>
+                        
+                      </div>
+                      <input type="text" class="form-control" placeholder="Mobile Number"
+                      data-toggle="tooltip" data-placement="top" title= "Mobile Number"
+                      minlength="10" maxlength="11" 
+                      formControlName="contactMobile"
+                       />
+                       </div>
+
+                  </div>
+
+                  <div class="col">
+                      <input type="text" class="form-control" placeholder="Email Id"
+                      data-toggle="tooltip" data-placement="top" title="Email Id"
+                      formControlName="contactEmail"
+                       /> 
+                  </div>
+
+                </div>
+
+              </div>
+
+             </div>
+
+            </div>
+
+           
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-body">
+
+          <div class="form-row">
+            <div class="col"></div>
+            <div class="col">
+                <button type="submit" [disabled]="disableBtn" class="btn btn-success" style="width:100%;">Submit</button>
+            </div>
+            <div class="col">
+                <button type="button" [disabled]="disableBtn" class="btn btn-danger" style="width:100%;" (click)="formReset()">Reset</button>
+            </div>
+            <div class="col">
+                <img class="img-responsive"  height=70 width=70 src="/assets/images/Loading_icon.gif" 
+                *ngIf="loading==true"
+               />
+            </div>
+          </div>
+
+          
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</form>
+
+</div>

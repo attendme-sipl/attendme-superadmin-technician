@@ -1,0 +1,405 @@
+
+
+<div class="container-fluid" >
+
+  <form #legalEntity ="ngForm" (ngSubmit) = "AddLegalEntity(legalEntity)" >
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 style="text-align: center;">Add legal entity</h3>
+    </div>
+  </div>
+
+  <div class="row">
+      
+    <div class="col-sm-12">
+
+      <div class="card">
+        <div class="card-header">
+          Legal entity identity details
+        </div>
+
+        <div class="card-body">
+          
+          <div class="form-group">
+
+            <div class="row">
+              <div class="col-sm-6">
+
+                  <input type="text" id="txtLeNm" class="form-control" placeholder="Legal entity name"
+                   data-toggle="tooltip" data-placement="top" title= "Legal Entity Name"
+                   required
+                   name="LeName" [(ngModel)] = "LeName" #LegalEntityNm = "ngModel"
+                   [ngClass]="{'is-invalid':legalEntity.submitted && LegalEntityNm.invalid }"
+                  />
+
+                  <div *ngIf="legalEntity.submitted && LegalEntityNm.invalid" class="invalid-feedback">
+                   Enter legal entity name
+                  </div>
+
+                 
+              </div>
+              <div class="col-sm-6">
+                  <input type="text" id="txtLeType" class="form-control" placeholder="Legal entity type" 
+                  data-toggle="tooltip" data-placement="top" title= "Legal Entity Type"
+                   required
+                   name="LeType" [(ngModel)] = "LeType" #LegalEntityType = "ngModel"
+                   [ngClass]="{'is-invalid':legalEntity.submitted && LegalEntityType.invalid}"/> 
+
+                   <div *ngIf="legalEntity.submitted && LegalEntityType.invalid" class="invalid-feedback">
+                      Enter legal entity type
+                  </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+       
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-header">
+          Legal entity rule book details
+        </div>
+
+        <div class="card-body">
+
+          <div class="form-group">
+
+            <div class="row">
+              <div class="col-sm-3">
+                <input type="text" class="form-control" placeholder="Allowed number of branch"
+                data-toggle="tooltip" data-placement="top" title= "Allowed number of branch" 
+                required
+                name="LeRbBrachQty" [(ngModel)] = "LeRbBrachQty" #RuleBookBranchQty="ngModel"
+                [ngClass]="{'is-invalid':legalEntity.submitted && RuleBookBranchQty.invalid}"/>
+               
+                <div *ngIf="legalEntity.submitted && RuleBookBranchQty.invalid" class="invalid-feedback">
+                    Enter number of branch for rule book
+                </div>
+
+              </div>
+              <div class="col-sm-3">
+                  <input type="text" class="form-control" placeholder="Allowed number of QR code"
+                  data-toggle="tooltip" data-placement="top" title= "Allowed number of QR Code"
+                  required 
+                  name ="LeRbQRQty" [(ngModel)] = "LeRbQRQty" #RuleBookQRQty = "ngModel" 
+                  [ngClass]="{'is-invalid':legalEntity.submitted && RuleBookQRQty.invalid}"/>
+
+                  
+
+                  <div *ngIf="legalEntity.submitted && RuleBookQRQty.invalid" class="invalid-feedback">
+                      Enter number of QR quantity for rule book
+                  </div>
+
+              </div>
+
+              <div class="col-sm-3">
+          
+                  <input type="number" class="form-control" placeholder="Unresloved complaint days"
+                  data-toggle="tooltip" data-placement="top" title= "Unresloved complaint days"
+                  required 
+                  name ="unreslovedDaysCount" [(ngModel)] = "unreslovedDaysCount" #RuleBookUnReolvedComptDaysQty = "ngModel" 
+                  [ngClass]="{'is-invalid':legalEntity.submitted && RuleBookUnReolvedComptDaysQty.invalid}"/>
+
+                  
+
+                  <div *ngIf="legalEntity.submitted && RuleBookUnReolvedComptDaysQty.invalid" class="invalid-feedback">
+                      Enter unresolved complaint days
+                  </div>
+
+              </div>
+
+              <div class="col-sm-3">
+
+                <select  class="form-control" 
+                name="comptStages" [(ngModel)]="comptStages" #ComptStagesList = "ngModel"
+                data-toggle="tooltip" data-placement="top" title= "Select Complaint Stages" 
+                [ngClass]="{'is-invalid':legalEntity.submitted && comptStages==0}"
+                (change)="UpdateMenuPreferenceControl()"
+                 >
+                  <option value="0" >complaint stages</option>
+                  <option *ngFor="let comptStage of complaintStageArr" [value]="comptStage.qrCompId"  >
+                    {{comptStage.comptStageType}}
+                  </option>
+                 
+                </select>
+
+                <div *ngIf="legalEntity.submitted && comptStages==0" class="invalid-feedback">
+                  Select complaint stage for rule book
+              </div>
+
+              </div>
+            </div>
+
+          
+          </div>
+          
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <div class="card-header">Legal entity menu preference</div>
+
+        <div class="card-body">
+
+          <div >
+
+            <div  *ngFor="let menuType of menuParametersArr | orderBy: 'menuParamId'" style="margin: 15px 15px;">
+              
+              <input type="text" class="form-control" placeholder="{{menuType.menuPlaceholder}}"
+               required
+               data-toggle="tooltip" data-placement="top" title ="{{menuType.menuPlaceholder}}"
+               name = {{menuType.ngModelPropName}} [(ngModel)] = "model[menuType.ngModelPropName]" #abc = "ngModel" 
+               [ngClass]="{'is-invalid':legalEntity.submitted && abc.invalid}" 
+               
+              />
+
+               <div *ngIf="legalEntity.submitted && abc.invalid" class="invalid-feedback" >
+                 Please enter {{menuType.menuPlaceholder}}
+               </div>
+
+            
+               
+            </div>
+
+           
+
+           <!-- <input *ngFor="let menuType of menuParametersArr | orderBy: 'menuParamId'" type="text" class="form-control" placeholder="{{menuType.menuPlaceholder}}"
+            data-toggle="tooltip" data-placement="top" title ="{{menuType.menuPlaceholder}}"
+            required 
+            style="margin: 10px 10px;"
+            name = {{menuType.ngModelPropName}} [(ngModel)] = "model[menuType.ngModelPropName]" 
+            [ngClass]="{'is-invalid':legalEntity.submitted && menuType.ngModelPropName.invalid}" /> 
+           -->
+           
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card">
+        <div class="card-header">Subcription Details</div>
+
+        <div class="card-body">
+
+          <div class="row">
+            <div class="col-sm-4">
+
+              <div class="form-group">
+
+                
+
+                  <select class="form-control" 
+                  name="subscriptionType" [(ngModel)] = "subscriptionType" #subscriptionTypeList = "ngModel"
+                  data-toggle="tooltip" data-placement="top" title= "Select Subscription Type" 
+                  [ngClass]="{'is-invalid':legalEntity.submitted && subscriptionType==0}">
+                   
+                   <option value="0" >Subscription Type</option>
+                   <option *ngFor="let subsType of subscriptionTypeArr" [value]="subsType.subscriptionId"  >
+                      {{subsType.subscriptinType}}
+                    </option>
+    
+                  </select>
+
+              </div>
+
+             
+
+            </div>
+
+            <div class="col-sm-4">
+              
+              <div class="form-group">
+
+                  
+
+                  <div class="input-group">
+
+                      <input type="text" class="form-control" placeholder="Start Date"
+                      data-toggle="tooltip" data-placement="top" title= "Subscription start date"
+                      required
+                      readonly="true"
+                      ngbDatepicker
+                      name="subsStartDate" [(ngModel)] = "subsStartDate" #startDate = "ngModel" #dp="ngbDatepicker"
+                      (ngModelChange) = "UpdateEndDate()"
+                      [ngClass]= "{'is-invalid':legalEntity.submitted && startDate.invalid}" 
+                      
+                      />
+
+                      <div class="input-group-append">
+                          <button class="btn " (click)="dp.toggle()" type="button">
+                              <i class="fa fa-calendar" aria-hidden="true"></i>
+                          </button>
+                        </div>
+
+                        
+                  </div>
+
+                  <small class="text-muted">YYYY-MM-DD</small>
+
+
+              </div>
+
+            </div>
+
+            <div class="col-sm-4">
+
+              <div class="form-group">
+
+               
+
+                <div class="input-group">
+
+                  <input type="text" class="form-control" placeholder="End Date"
+                  data-toggle="tooltip" data-placement="top" title= "Subscription end date"
+                  required
+                  ngbDatepicker
+                  readonly="true"
+                  name="subsEndDate" [(ngModel)] = "subsEndDate" #endDate = "ngModel" #eDate="ngbDatepicker"
+                  [ngClass]= "{'is-invalid':legalEntity.submitted && endDate.invalid}" />
+
+                  <div class="input-group-append">
+                      <button class="btn " (click)="eDate.toggle()" type="button">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                      </button>
+                    </div>
+
+                  </div>
+
+                  <small class="text-muted">YYYY-MM-DD</small>
+
+              </div>
+
+          
+            </div>
+
+          
+           
+
+            <div *ngIf="legalEntity.submitted && ((subsStartDate.year + '-' + subsStartDate.month + '-' + subsStartDate.day | date:'yyyy-MM-dd') > (subsEndDate.year + '-' + subsEndDate.month + '-' + subsEndDate.day | date:'yyyy-MM-dd'))" class="alert alert-danger" >
+              Select subscription start date less than end date
+            </div>
+            
+          </div>
+
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          Legal entity admin details
+        </div>
+
+        <div class="card-body">
+          
+          <div class="row">
+
+            <div class="col-sm-4">
+              <input type="text" class="form-control" placeholder="Admin full name"
+              data-toggle="tooltip" data-placement="top" title= "Admin full name"
+              required
+              name="LeAdminNm" [(ngModel)] = "LeAdminNm" #LegalEntityAdminNm = "ngModel" 
+              [ngClass]="{'is-invalid':legalEntity.submitted && LegalEntityAdminNm.invalid}"/>
+
+              <div *ngIf="legalEntity.submitted && LegalEntityAdminNm.invalid" class="invalid-feedback">
+                  Enter legal entity admin full name
+              </div>
+
+            </div>
+            <div class="col-sm-4">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      
+                      <select class="form-control" 
+                      data-toggle="tooltip" data-placement="top" title= "Country calling code"
+                      name="countryCode" [(ngModel)]="countryCode" #countryCodeList="ngModel"
+                      [ngClass]="{'is-invalid':legalEntity.submitted && LegalEntityAdminMobile.invalid}">
+                        
+                        <option value="1">1</option>
+                        <option value="91">91</option>
+                        
+                      </select>
+                      
+                    </div>
+                    <input type="text" class="form-control" placeholder="Admin mobile no."
+                    data-toggle="tooltip" data-placement="top" title= "Admin mobile number"
+                     required 
+                     name="LeAdminMobile" [(ngModel)] = "LeAdminMobile" #LegalEntityAdminMobile = "ngModel" 
+                     [ngClass]="{'is-invalid':legalEntity.submitted && LegalEntityAdminMobile.invalid}" />
+
+                    <div *ngIf="legalEntity.submitted && LegalEntityAdminMobile.invalid" class="invalid-feedback">
+                        Enter legal entity admin mobile number
+                    </div>
+
+                  </div>
+            </div>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" placeholder="Admin email id"
+                data-toggle="tooltip" data-placement="top" title= "Admin email id"
+                required
+                name="LeEmailId" [(ngModel)] = "LeEmailId" #LegalEntityEmailId = "ngModel"
+                [ngClass]="{'is-invalid':legalEntity.submitted && LegalEntityEmailId.invalid}"  />
+
+                <div *ngIf="legalEntity.submitted && LegalEntityEmailId.invalid" class="invalid-feedback">
+                    Enter legal entity admin email id
+                </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div [ngClass]="alertClass" *ngIf="dispErrorDiv" >
+        {{alertMessage}}
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="form-group">
+
+            <div class="row">
+
+              <div class="col-sm-3"></div>
+              <div class="col-sm-3">
+                <button type="submit" [disabled]="btnDisable" class="btn btn-success" style="width: 100%;">Submit
+                 
+                </button>
+
+                
+              </div>
+              <div class="col-sm-3">
+                  <button type="button" [disabled]="btnDisable"  class="btn btn-danger" style="width: 100%;" (click)="reset(legalEntity)" >Reset</button>
+              </div>
+              <div class="col-sm-3" >
+
+                <img class="img-responsive"  height=70 width=70 src="/assets/images/Loading_icon.gif" 
+                 *ngIf="loading==true"
+                /> 
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+   
+  </div>
+
+
+</form>
+
+</div>
+
